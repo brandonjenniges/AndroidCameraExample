@@ -4,6 +4,7 @@ import java.io.File;
 import java.io.FileOutputStream;
 import java.text.SimpleDateFormat;
 import java.util.Date;
+import java.util.Locale;
 
 import android.app.Activity;
 import android.hardware.Camera;
@@ -24,7 +25,9 @@ public class MakePhotoActivity extends Activity implements PictureCallback {
 	Button shutterButton;
 	Button zoomInButton;
 	Button zoomOutButton;
+	Button flashButton;
 	int zoom = 0;
+	boolean flashStatus = true;
 	private final static String DEBUG_TAG = "MakePhotoActivity";
 
 	@Override
@@ -66,6 +69,16 @@ public class MakePhotoActivity extends Activity implements PictureCallback {
 
 			}
 		});
+
+		flashButton = (Button) findViewById(R.id.flash);
+		flashButton.setOnClickListener(new OnClickListener() {
+
+			@Override
+			public void onClick(View v) {
+				toggleFlash();
+
+			}
+		});
 	}
 
 	@Override
@@ -91,6 +104,13 @@ public class MakePhotoActivity extends Activity implements PictureCallback {
 		zoom = cameraSurfaceView.changeZoom(zoom += 10);
 	}
 
+	private void toggleFlash() {
+		flashStatus = cameraSurfaceView.toggleFlash(flashStatus);
+
+		flashButton.setText(flashStatus ? R.string.enable_flash
+				: R.string.disable_flash);
+	}
+
 	@Override
 	public void onPictureTaken(byte[] data, Camera camera) {
 
@@ -107,9 +127,10 @@ public class MakePhotoActivity extends Activity implements PictureCallback {
 
 		}
 
-		SimpleDateFormat dateFormat = new SimpleDateFormat("yyyymmddhhmmss");
+		SimpleDateFormat dateFormat = new SimpleDateFormat("yyyyMMddhhmmss",
+				Locale.US);
 		String date = dateFormat.format(new Date());
-		String photoFile = "TruckInspection_123456_" + date + ".jpg";
+		String photoFile = "CameraDemo_" + date + ".jpg";
 
 		String filename = pictureFileDir.getPath() + File.separator + photoFile;
 

@@ -4,6 +4,7 @@ import java.io.IOException;
 
 import android.content.Context;
 import android.hardware.Camera;
+import android.hardware.Camera.Parameters;
 import android.hardware.Camera.PictureCallback;
 import android.view.SurfaceHolder;
 import android.view.SurfaceView;
@@ -15,8 +16,6 @@ class CameraSurfaceView extends SurfaceView implements SurfaceHolder.Callback {
 	CameraSurfaceView(Context context) {
 		super(context);
 
-		// Install a SurfaceHolder.Callback so we get notified when the
-		// underlying surface is created and destroyed.
 		SurfaceHolder holder = this.getHolder();
 		holder.addCallback(this);
 	}
@@ -25,12 +24,6 @@ class CameraSurfaceView extends SurfaceView implements SurfaceHolder.Callback {
 	public void surfaceChanged(SurfaceHolder holder, int format, int width,
 			int height) {
 
-		// The default orientation is landscape, so for a portrait app like this
-		// one we need to rotate the view 90 degrees.
-		// camera.setDisplayOrientation(90);
-
-		// IMPORTANT: We must call startPreview() on the camera before we take
-		// any pictures
 		camera.startPreview();
 	}
 
@@ -39,10 +32,12 @@ class CameraSurfaceView extends SurfaceView implements SurfaceHolder.Callback {
 		try {
 			// Open the Camera in preview mode
 			this.camera = Camera.open();
+
 			Camera.Parameters p = camera.getParameters();
 			p.setZoom(0);
-
+			p.setFlashMode(Parameters.FLASH_MODE_AUTO);
 			camera.setParameters(p);
+
 			this.camera.setPreviewDisplay(holder);
 		} catch (IOException ioe) {
 			ioe.printStackTrace(System.out);
@@ -83,6 +78,15 @@ class CameraSurfaceView extends SurfaceView implements SurfaceHolder.Callback {
 
 		return zoom;
 
+	}
+
+	public boolean toggleFlash(boolean flashStatus) {
+		Camera.Parameters p = camera.getParameters();
+		p.setFlashMode(flashStatus ? Parameters.FLASH_MODE_OFF
+				: Parameters.FLASH_MODE_ON);
+		camera.setParameters(p);
+
+		return !flashStatus;
 	}
 
 }

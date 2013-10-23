@@ -4,5 +4,10 @@
     <string name="app_name">PhotoMaker</string>
     <string name="action_settings">Settings</string>
     <string name="hello_world">Hello world!</string>
+    <string name="take_picture">Take picture</string>
+    <string name="zoom_in">Zoom in</string>
+    <string name="zoom_out">Zoom out</string>
+    <string name="enable_flash">Flash enabled</string>
+    <string name="disable_flash">Flash disabled</string>
 
 </resources>

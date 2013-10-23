@@ -17,30 +17,47 @@
 
         <Button
             android:id="@+id/shutter_button"
+            style="?android:attr/buttonBarButtonStyle"
             android:layout_width="fill_parent"
             android:layout_height="fill_parent"
             android:layout_gravity="center"
             android:layout_margin="10dp"
             android:layout_weight="1"
-            android:text="Take Picture" />
+            android:background="@drawable/roundrect_button_selector"
+            android:text="@string/take_picture" />
 
         <Button
             android:id="@+id/zoom_in"
+            style="?android:attr/buttonBarButtonStyle"
             android:layout_width="fill_parent"
             android:layout_height="fill_parent"
             android:layout_gravity="center"
             android:layout_margin="10dp"
             android:layout_weight="1"
-            android:text="Zoom in" />
+            android:background="@drawable/roundrect_button_selector"
+            android:text="@string/zoom_in" />
 
         <Button
             android:id="@+id/zoom_out"
+            style="?android:attr/buttonBarButtonStyle"
             android:layout_width="fill_parent"
             android:layout_height="fill_parent"
             android:layout_gravity="center"
             android:layout_margin="10dp"
             android:layout_weight="1"
-            android:text="Zoom out" />
+            android:background="@drawable/roundrect_button_selector"
+            android:text="@string/zoom_out" />
+
+        <Button
+            android:id="@+id/flash"
+            style="?android:attr/buttonBarButtonStyle"
+            android:layout_width="fill_parent"
+            android:layout_height="fill_parent"
+            android:layout_gravity="center"
+            android:layout_margin="10dp"
+            android:layout_weight="1"
+            android:background="@drawable/roundrect_button_selector"
+            android:text="@string/enable_flash" />
     </LinearLayout>
 
 </LinearLayout>
